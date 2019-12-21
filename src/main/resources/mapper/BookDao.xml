@@ -1,0 +1,44 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper
+        PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+        "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.web.book.dao.BookDao">
+    <select id="queryById" parameterType="long" resultType="com.web.book.entity.Book">
+        <!-- 具体的sql语句 -->
+        select
+          book_id,
+          name,
+          introd,
+          number
+        from
+          book
+        where
+          book_id=#{bookId}
+    </select>
+    <select id="querySome" parameterType="com.web.book.entity.Book" resultType="com.web.book.entity.Book">
+        select
+          book_id,
+          name,
+          introd,
+          number
+        from
+          book
+        where
+        name like '%' #{name} '%'
+    </select>
+    <select id="queryAll" resultType="com.web.book.entity.Book">
+        SELECT
+			book_id,
+			name,
+			introd,
+			number
+		FROM
+			book
+    </select>
+    <update id="reduceNumber" parameterType="long" >
+        update book
+        set number = number -1
+        where book_id = #{bookId}
+        and number >0
+    </update>
+</mapper>
