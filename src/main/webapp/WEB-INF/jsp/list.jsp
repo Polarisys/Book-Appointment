@@ -46,7 +46,7 @@
                     <th>详细</th>
                 </tr>
                 </thead>
-                <tbody>
+                <tbody id="bookList">
                 <c:forEach items="${list}" var="sk">
                     <tr>
                         <td>${sk.bookId}</td>
@@ -58,6 +58,22 @@
                 </tbody>
             </table>
         </div>
+        <nav aria-label="Page navigation">
+            <ul class="pager pagination-lg">
+                <li>
+                    <a href="#" aria-label="Previous" id="previous"><span aria-hidden="true"><<</span></a>
+                </li>
+                <li><a href="#" id="first-column" class="columnFlag"></a></li>
+                <li><a href="#" id="second-column" class="columnFlag"></a></li>
+                <li><a href="#" id="third-column" class="columnFlag"></a></li>
+                <li><a href="#" id="forth-column" class="columnFlag"></a></li>
+                <li><a href="#" id="fifth-column" class="columnFlag"></a></li>
+                <li>
+                    <a href="#" aria-label="Next" id="next"><span aria-hidden="true">>></span></a>
+                </li>
+                <li><span>输入每页的条数</span><input type="text" id="recordNumber" value="5"></li>
+            </ul>
+        </nav>
     </div>
 </div>
 <!-- jQuery文件。务必在bootstrap.min.js 之前引入 -->
@@ -65,5 +81,11 @@
 
 <!-- 最新的 Bootstrap 核心 JavaScript 文件 -->
 <script src="http://apps.bdimg.com/libs/bootstrap/3.3.0/js/bootstrap.min.js"></script>
+<script src="${pageContext.request.contextPath}/resources/script/bookAppointment.js" type="text/javascript"></script>
 </body>
+<script type="text/javascript">
+    $(function () {
+        bookAppointment.list.init();
+    })
+</script>
 </html>

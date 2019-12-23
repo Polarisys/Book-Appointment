@@ -41,7 +41,7 @@ public class BookController {
     //获取图书列表
     @RequestMapping(value = "/list", method = RequestMethod.GET)
     private String List(Model model) {
-        List<Book> list = bookService.getList();
+        List<Book> list = bookService.getList(1,5);
         model.addAttribute("list", list);
         return "list";
     }
@@ -57,6 +57,26 @@ public class BookController {
         request.setAttribute("name", name);
         request.setAttribute("list", bookService.getSomeList(name));
         request.getRequestDispatcher("/WEB-INF/jsp/list.jsp").forward(request, response);
+    }
+
+    //实现分页
+    @RequestMapping(value = "/page",method = RequestMethod.GET)
+    @ResponseBody
+    private List<Book> pageLis(Model model,HttpServletRequest request,HttpServletResponse response){
+        String secondColumn = request.getParameter("columnNumber");
+        String record = request.getParameter("recordNumber");
+        List<Book> list = null;
+        if(record.equals("")){
+            record = "5" ;
+        }
+       if(secondColumn!=null){
+           Integer pageNumber = Integer.parseInt(secondColumn);
+           Integer recordNumber = Integer.parseInt(record);
+           list = bookService.getList(pageNumber,recordNumber);
+       }else {
+           list = bookService.getList(1,5);
+       }
+       return  list;
     }
 
     //查看某图书的详细情况
@@ -80,7 +100,6 @@ public class BookController {
         Student student = null;
         student = bookService.validateStu(studentId, password);
         if (student != null) {
-            System.out.println("SUCCESS");
             resultMap.put("result", "SUCCESS");
             return resultMap;
         } else {
@@ -118,7 +137,6 @@ public class BookController {
     //查看已预约的书籍
     @RequestMapping(value ="/appoint")
     private String appointBooks(@RequestParam("studentId") long studentId, Model model){
-
         List<Appointment> appointList=new ArrayList<Appointment>();
         appointList=bookService.getAppointByStu(studentId);
         model.addAttribute("appointList", appointList);

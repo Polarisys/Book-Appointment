@@ -21,7 +21,7 @@ public interface BookService {
     /*
     查询所有的图书
      */
-    List<Book> getList();
+    List<Book> getList(int pageNumber,int recordNumber);
 
     /*
     登录时查询数据库是否有该学生的记录

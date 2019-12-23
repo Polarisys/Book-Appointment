@@ -44,8 +44,9 @@ public class BookServiceImpl implements BookService {
     }
 
     @Override
-    public List<Book> getList() {
-        return bookDao.queryAll();
+    public List<Book> getList(int pageNumber,int recordNumber) {
+        int startNumber = (pageNumber - 1)*recordNumber+1;
+        return bookDao.queryAll(startNumber,recordNumber);
     }
 
     @Override

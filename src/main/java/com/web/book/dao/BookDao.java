@@ -1,6 +1,7 @@
 package com.web.book.dao;
 
 import com.web.book.entity.Book;
+import org.apache.ibatis.annotations.Param;
 
 import java.util.List;
 
@@ -21,9 +22,9 @@ public interface BookDao {
     List<Book> querySome(String bookName);
 
     /*
-    查询所有的书籍
+    根据每页的记录和页数筛选数据
      */
-    List<Book> queryAll();
+    List<Book> queryAll(@Param("startNumber") int startNumber,@Param("recordNumber") int recordNumber);
 
     /*
     减少库存的数量

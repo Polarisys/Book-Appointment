@@ -34,6 +34,9 @@
 			number
 		FROM
 			book
+		order by
+		  book_id
+		limit #{startNumber},#{recordNumber}
     </select>
     <update id="reduceNumber" parameterType="long" >
         update book
