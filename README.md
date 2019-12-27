@@ -23,4 +23,4 @@ AppointStateEnum
 
 最后编写前端的代码，使用bootstrap轻量一站式框架开发前端，具体见详细代码。
 
-[!image](https://github.com/sily-baby/Book-Appointment/blob/master/src/main/webapp/resources/image/2019-12-27_220219.png)
+![image](https://github.com/sily-baby/Book-Appointment/blob/master/src/main/webapp/resources/image/2019-12-27_220219.png)
