@@ -25,3 +25,12 @@ AppointStateEnum
 
 登录时会选择管理员或者是学生
 ![image](https://github.com/sily-baby/Book-Appointment/blob/master/src/main/webapp/resources/image/2019-12-27_220219.png)
+
+选择学生时会显示预约按钮和查看已预约书籍
+![image](https://github.com/sily-baby/Book-Appointment/blob/master/src/main/webapp/resources/image/2019-12-27_221531.png)
+
+选择管理员时会显色添加图书的按钮
+![image](https://github.com/sily-baby/Book-Appointment/blob/master/src/main/webapp/resources/image/2019-12-27_221738.png)
+
+点击添加图书后会进入添加图书的界面
+![image](https://github.com/sily-baby/Book-Appointment/blob/master/src/main/webapp/resources/image/2019-12-27_221828.png)
