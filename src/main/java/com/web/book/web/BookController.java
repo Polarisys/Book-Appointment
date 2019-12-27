@@ -2,6 +2,7 @@ package com.web.book.web;
 
 import com.web.book.dto.AppointExecution;
 import com.web.book.dto.Result;
+import com.web.book.entity.Admin;
 import com.web.book.entity.Appointment;
 import com.web.book.entity.Book;
 import com.web.book.entity.Student;
@@ -92,19 +93,24 @@ public class BookController {
     }
 
     //验证输入的用户名、密码是否正确
-    @RequestMapping(value="/verify", method = RequestMethod.POST, produces = {
+    @RequestMapping(value="/verifyStudent", method = RequestMethod.POST, produces = {
             "application/json; charset=utf-8" })
     @ResponseBody
-    private Map validate(Long studentId, Long password) {   //(HttpServletRequest req,HttpServletResponse resp){
-        Map resultMap = new HashMap();
+    private Map validateStudent(HttpServletRequest request, HttpServletResponse response) {
+        Map studentMap = new HashMap();
         Student student = null;
+        String studentIds = request.getParameter("userId");
+        long studentId = Long.parseLong(studentIds);
+        String passwords = request.getParameter("password");
+        long password  = Long.parseLong(passwords);
         student = bookService.validateStu(studentId, password);
         if (student != null) {
-            resultMap.put("result", "SUCCESS");
-            return resultMap;
+            System.out.println("SUCCESS");
+            studentMap.put("result", "SUCCESS");
+            return studentMap;
         } else {
-            resultMap.put("result", "FAILED");
-            return resultMap;
+            studentMap.put("result", "FAILED");
+            return studentMap;
         }
     }
     //执行预约的逻辑
@@ -141,5 +147,49 @@ public class BookController {
         appointList=bookService.getAppointByStu(studentId);
         model.addAttribute("appointList", appointList);
         return "appointBookList";
+    }
+
+    //跳转到添加图书页面
+    @RequestMapping(value = "/admin",method = RequestMethod.GET)
+    private String add(Model model){
+        return "admin";
+    }
+
+    //添加图书
+    @RequestMapping(value = "/bookData")
+    @ResponseBody
+    private String bookData(HttpServletRequest request,HttpServletResponse response){
+        String bookId = request.getParameter("bookId");
+        String bookName = request.getParameter("bookName");
+        String bookIntrod = request.getParameter("bookIntrod");
+        String bookNumber = request.getParameter("bookNumber");
+        Long id = Long.parseLong(bookId);
+        Integer number = Integer.parseInt(bookNumber);
+        Book book = bookService.getById(id);
+        if(book == null){
+            bookService.addBook(id,bookName,bookIntrod,number);
+            return "success";
+        }else {
+            //数据库存在相同的书籍ID
+            return "failed";
+        }
+    }
+
+    //管理员验证登录
+    @RequestMapping(value = "/verifyAdmin",method = RequestMethod.POST)
+    @ResponseBody
+    private Map validateAdmin(HttpServletRequest request,HttpServletResponse response){
+        Map adminMap = new HashMap();
+        Admin admin = null;
+        String adminId = request.getParameter("userId");
+        String password = request.getParameter("password");
+        admin = bookService.validateAdmin(adminId,password);
+        if(admin != null){
+            adminMap.put("result","SUCCESS");
+            return adminMap;
+        }else{
+            adminMap.put("result", "FAILED");
+            return adminMap;
+        }
     }
 }

@@ -1,9 +1,11 @@
 package com.web.book.service.Impl;
 
+import com.web.book.dao.AdminDao;
 import com.web.book.dao.AppointmentDao;
 import com.web.book.dao.BookDao;
 import com.web.book.dao.StudentDao;
 import com.web.book.dto.AppointExecution;
+import com.web.book.entity.Admin;
 import com.web.book.entity.Appointment;
 import com.web.book.entity.Book;
 import com.web.book.entity.Student;
@@ -37,6 +39,9 @@ public class BookServiceImpl implements BookService {
 
     @Resource
     private StudentDao studentDao;
+
+    @Resource
+    private AdminDao adminDao;
 
     @Override
     public Book getById(long bookId) {
@@ -90,4 +95,15 @@ public class BookServiceImpl implements BookService {
             throw new AppointException("appoint inner error:" + e.getMessage());
         }
     }
+
+    @Override
+    public int addBook(long bookId, String name, String introd, int number) {
+        return bookDao.addBook(bookId,name,introd,number);
+    }
+
+    @Override
+    public Admin validateAdmin(String adminId, String adminPassword) {
+        return adminDao.queryAdmin(adminId,adminPassword);
+    }
+
 }

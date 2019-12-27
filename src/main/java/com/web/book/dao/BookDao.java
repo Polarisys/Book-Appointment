@@ -31,4 +31,9 @@ public interface BookDao {
     用返回值判断当前的库存是否还有书籍
      */
     int reduceNumber(long bookId);
+
+    /*
+    增加图书
+     */
+    int addBook(@Param("bookId") long bookId,@Param("name") String name,@Param("introd") String introd,@Param("number") int number);
 }

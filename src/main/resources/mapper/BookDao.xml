@@ -44,4 +44,10 @@
         where book_id = #{bookId}
         and number >0
     </update>
+    <insert id="addBook">
+        insert
+        into
+        book
+        values(#{bookId},#{name},#{introd},#{number})
+    </insert>
 </mapper>

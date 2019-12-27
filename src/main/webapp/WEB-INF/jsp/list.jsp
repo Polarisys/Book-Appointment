@@ -80,6 +80,7 @@
 <script src="http://apps.bdimg.com/libs/jquery/2.0.0/jquery.min.js"></script>
 
 <!-- 最新的 Bootstrap 核心 JavaScript 文件 -->
+<script src="${pageContext.request.contextPath}/resources/script/jquery.cookie.js"></script>
 <script src="http://apps.bdimg.com/libs/bootstrap/3.3.0/js/bootstrap.min.js"></script>
 <script src="${pageContext.request.contextPath}/resources/script/bookAppointment.js" type="text/javascript"></script>
 </body>

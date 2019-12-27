@@ -46,42 +46,63 @@
                 <!--用来展示预约控件 -->
                 <span class="glyphicon" id="appoint-box"></span>
                 <!--在js里面调用这个id还可以动态显示一些其他东西，例如动态时间等（需要插件）-->
-                <span class="glyphicon"><a class="btn btn-primary btn-lg" href="/book/books/appoint?studentId=${cookie['studentId'].value}" target="_blank">查看我的已预约书籍</a></span>
+                <span id="checkAppointment" class="glyphicon" ><a class="btn btn-primary btn-lg" href="/book/books/appoint?studentId=${cookie['userId'].value}" target="_blank"   >查看我的已预约书籍</a></span>
+                <span  class="glyphicon" id="bookAdd" ><button type="button" class="btn btn-info" id="addBook">添加图书</button></span>
                 <!--如何获取该页面弹出层输入的学生ID， 传给上面的url-->
             </h2>
         </div>
     </div>
 </div>
 <!--登录弹出层 -->
-<div id="verifyModal" class="modal fade" >
+<div id="chooseModel" class="modal fade" style="display:none;">
     <div class="modal-dialog">
         <div class="modal-content">
             <div class="modal-header">
                 <h3 class="modal-title text-center">
-                    <span class="glyphicon glyphicon-studentId"> </span>请输入学号和密码:
+                    <span class="glyphicon glyphicon-studentId"> </span>请选择登录方式:
                 </h3>
             </div>
-
             <div class="modal-body">
                 <div class="row">
-                    <div class="col-xs-8 col-xs-offset-2">
-                        <input type="text" name="studentId" id="studentIdKey"
-                               placeholder="填写学号^o^" class="form-control">
+                    <div class="col-xs-4 col-xs-offset-2">
+                        <button type="button" class="btn btn-primary btn-lg" id="adminLogin">管理员登录</button>
                     </div>
-                    <div class="col-xs-8 col-xs-offset-2">
-                        <input type="password" name="password" id="passwordKey"
-                               placeholder="输入密码^o^" class="form-control">
+                    <div class="col-xs-4">
+                        <button type="button" class="btn btn-info btn-lg" id="studentLogin">学生登录</button>
                     </div>
                 </div>
             </div>
+        </div>
+    </div>
+</div>
 
+<div id="userModel" class="modal fade" style="display:none">
+    <div class="modal-dialog">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h3 class="modal-title text-center">
+                    <span id="userText" class="glyphicon glyphicon-studentId"></span>
+                </h3>
+            </div>
+            <div class="modal-body">
+                <div class="row">
+                    <div class="col-xs-8 col-xs-offset-2">
+                        <input type="text" name="userId" id="userIdKey"
+                               placeholder="请输入帐号" class="form-control">
+                    </div>
+                    <div class="col-xs-8 col-xs-offset-2">
+                        <input type="password" name="password" id="passwordKey"
+                               placeholder="请输入密码" class="form-control">
+                    </div>
+                </div>
+            </div>
             <div class="modal-footer">
                 <!--  验证信息 -->
-                <span id="studentMessage" class="glyphicon"> </span>
-                <button type="button" id="studentBtn" class="btn btn-success">
-                    <span class="glyphicon glyphicon-student"></span>
-                    Submit
+                <span id="userMessage"> </span>
+                <button type="button" id="userBtn" class="btn btn-success">
+                    登录
                 </button>
+                <a href="#" class="btn" data-dismiss="modal">关闭</a>
             </div>
         </div>
     </div>
@@ -104,6 +125,6 @@
         bookAppointment.detail.init({
             bookId:${book.bookId}
         });
-    })
+    });
 </script>
 </html>

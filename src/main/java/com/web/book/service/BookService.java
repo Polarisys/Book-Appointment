@@ -1,6 +1,7 @@
 package com.web.book.service;
 
 import com.web.book.dto.AppointExecution;
+import com.web.book.entity.Admin;
 import com.web.book.entity.Appointment;
 import com.web.book.entity.Book;
 import com.web.book.entity.Student;
@@ -42,4 +43,14 @@ public interface BookService {
     预约图书
      */
     AppointExecution appoint(long bookId,long studentId);//返回预约成功后的实体类
+
+    /*
+    增加图书
+     */
+    int addBook(long bookId,String name,String introd,int number);
+
+    /*
+    校验管理员登录
+     */
+    Admin validateAdmin(String adminId,String adminPassword);
 }
